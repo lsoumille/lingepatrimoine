@@ -1,0 +1,10 @@
+# robots.txt for L'Ingé Patrimoine
+User-agent: *
+Allow: /
+Disallow: /logo/
+
+# Sitemap location
+Sitemap: https://lingepatrimoine.fr/sitemap.xml
+
+# Crawl-delay for polite crawlers
+Crawl-delay: 1
