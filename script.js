@@ -43,33 +43,45 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ===================================
-    // Fade-in Animation on Scroll
+    // Fade-in Animation on Scroll (Enhanced + Reduced Motion)
     // ===================================
     const fadeElements = document.querySelectorAll('.fade-in');
     
-    // Configuration de l'Intersection Observer
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15 // L'élément doit être visible à 15% pour déclencher l'animation
-    };
+    // Vérifier si l'utilisateur préfère moins d'animations
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
-    const observer = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Ajoute la classe 'visible' pour déclencher l'animation
-                entry.target.classList.add('visible');
-                
-                // Optionnel : arrêter d'observer après l'animation
-                // observer.unobserve(entry.target);
-            }
+    if (prefersReducedMotion) {
+        // Afficher immédiatement tous les éléments sans animation
+        fadeElements.forEach(element => {
+            element.classList.add('visible');
         });
-    }, observerOptions);
-    
-    // Observer tous les éléments fade-in
-    fadeElements.forEach(element => {
-        observer.observe(element);
-    });
+    } else {
+        // Configuration de l'Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // L'élément doit être visible à 10% pour déclencher l'animation
+        };
+        
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Ajoute la classe 'visible' pour déclencher l'animation avec un léger délai
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, 100);
+                    
+                    // Optionnel : arrêter d'observer après l'animation
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observer tous les éléments fade-in
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
     
     // ===================================
     // Active Navbar Link on Scroll
@@ -103,20 +115,24 @@ document.addEventListener('DOMContentLoaded', function() {
     updateActiveNavLink();
     
     // ===================================
-    // Navbar Shadow on Scroll
+    // Navbar Shadow & Blur on Scroll (Enhanced)
     // ===================================
     const navbar = document.querySelector('.navbar');
     
-    function updateNavbarShadow() {
+    function updateNavbarOnScroll() {
         if (window.scrollY > 50) {
-            navbar.classList.add('shadow-lg');
+            navbar.classList.add('navbar-scrolled');
+            navbar.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
+            navbar.style.backdropFilter = 'blur(16px)';
         } else {
-            navbar.classList.remove('shadow-lg');
+            navbar.classList.remove('navbar-scrolled');
+            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            navbar.style.backdropFilter = 'blur(10px)';
         }
     }
     
-    window.addEventListener('scroll', updateNavbarShadow);
-    updateNavbarShadow();
+    window.addEventListener('scroll', updateNavbarOnScroll);
+    updateNavbarOnScroll();
     
     // ===================================
     // Performance: Debounce Scroll Events
@@ -140,8 +156,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Optimiser les événements de scroll
     window.addEventListener('scroll', debounce(function() {
         updateActiveNavLink();
-        updateNavbarShadow();
-    }, 10));
+        updateNavbarOnScroll();
+    }, 15));
     
     // ===================================
     // Add Hover Effect to Cards
