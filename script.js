@@ -1,25 +1,25 @@
 // ===================================
 // Smooth Scroll for Anchor Links
 // ===================================
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     // Smooth scroll for all anchor links
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    
+
     anchorLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            
+
             // Ignore empty anchors
             if (href === '#' || href === '#!') {
                 return;
             }
-            
+
             e.preventDefault();
-            
+
             const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
-            
+
             if (targetElement) {
                 // Close mobile navbar if open
                 const navbarCollapse = document.getElementById('navbarNav');
@@ -29,11 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                     bsCollapse.hide();
                 }
-                
+
                 // Smooth scroll to target
                 const navbarHeight = document.querySelector('.navbar').offsetHeight;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -41,15 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // ===================================
     // Fade-in Animation on Scroll (Enhanced + Reduced Motion)
     // ===================================
     const fadeElements = document.querySelectorAll('.fade-in');
-    
+
     // Vérifier si l'utilisateur préfère moins d'animations
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
+
     if (prefersReducedMotion) {
         // Afficher immédiatement tous les éléments sans animation
         fadeElements.forEach(element => {
@@ -62,41 +62,41 @@ document.addEventListener('DOMContentLoaded', function() {
             rootMargin: '0px',
             threshold: 0.1 // L'élément doit être visible à 10% pour déclencher l'animation
         };
-        
-        const observer = new IntersectionObserver(function(entries, observer) {
+
+        const observer = new IntersectionObserver(function (entries, observer) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     // Ajoute la classe 'visible' pour déclencher l'animation avec un léger délai
                     setTimeout(() => {
                         entry.target.classList.add('visible');
                     }, 100);
-                    
+
                     // Optionnel : arrêter d'observer après l'animation
                     // observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
-        
+
         // Observer tous les éléments fade-in
         fadeElements.forEach(element => {
             observer.observe(element);
         });
     }
-    
+
     // ===================================
     // Active Navbar Link on Scroll
     // ===================================
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
-    
+
     function updateActiveNavLink() {
         const scrollPosition = window.scrollY + 100;
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             const sectionId = section.getAttribute('id');
-            
+
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -107,18 +107,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Mettre à jour au scroll
     window.addEventListener('scroll', updateActiveNavLink);
-    
+
     // Mettre à jour au chargement
     updateActiveNavLink();
-    
+
     // ===================================
     // Navbar Shadow & Blur on Scroll (Enhanced)
     // ===================================
     const navbar = document.querySelector('.navbar');
-    
+
     function updateNavbarOnScroll() {
         if (window.scrollY > 50) {
             navbar.classList.add('navbar-scrolled');
@@ -130,19 +130,19 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.style.backdropFilter = 'blur(10px)';
         }
     }
-    
+
     window.addEventListener('scroll', updateNavbarOnScroll);
     updateNavbarOnScroll();
-    
+
     // ===================================
     // Performance: Debounce Scroll Events
     // ===================================
     function debounce(func, wait = 10, immediate = true) {
         let timeout;
-        return function() {
+        return function () {
             const context = this;
             const args = arguments;
-            const later = function() {
+            const later = function () {
                 timeout = null;
                 if (!immediate) func.apply(context, args);
             };
@@ -152,46 +152,46 @@ document.addEventListener('DOMContentLoaded', function() {
             if (callNow) func.apply(context, args);
         };
     }
-    
+
     // Optimiser les événements de scroll
-    window.addEventListener('scroll', debounce(function() {
+    window.addEventListener('scroll', debounce(function () {
         updateActiveNavLink();
         updateNavbarOnScroll();
     }, 15));
-    
+
     // ===================================
     // Add Hover Effect to Cards
     // ===================================
     const hoverCards = document.querySelectorAll('.hover-card');
-    
+
     hoverCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
+        card.addEventListener('mouseenter', function () {
             this.style.transition = 'all 0.3s ease';
         });
     });
-    
+
     // ===================================
     // Service Cards Touch Support (Mobile)
     // ===================================
-    const serviceCards = document.querySelectorAll('.service-card-hover');
-    
+    const serviceCards = document.querySelectorAll('.service-card-v2');
+
     // Pour mobile, toggle la classe active au tap
     serviceCards.forEach(card => {
-        card.addEventListener('click', function(e) {
+        card.addEventListener('click', function (e) {
             // Seulement pour les appareils tactiles
             if ('ontouchstart' in window) {
                 e.preventDefault();
-                
+
                 // Toggle active state
                 const isActive = this.classList.contains('active');
-                
+
                 // Fermer toutes les autres cartes
                 serviceCards.forEach(otherCard => {
                     if (otherCard !== this) {
                         otherCard.classList.remove('active');
                     }
                 });
-                
+
                 // Toggle cette carte
                 if (isActive) {
                     this.classList.remove('active');
@@ -201,20 +201,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // ===================================
     // Accordion Enhanced Behavior
     // ===================================
     const accordionButtons = document.querySelectorAll('.accordion-button');
-    
+
     accordionButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Scroll to accordion item when opened on mobile
             if (window.innerWidth < 768) {
                 setTimeout(() => {
                     const navbarHeight = document.querySelector('.navbar').offsetHeight;
                     const buttonPosition = this.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
-                    
+
                     window.scrollTo({
                         top: buttonPosition,
                         behavior: 'smooth'
@@ -223,18 +223,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // ===================================
     // Email Protection (Optional)
     // ===================================
     // Protection basique contre le scraping d'emails
     const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
     emailLinks.forEach(link => {
-        link.addEventListener('contextmenu', function(e) {
+        link.addEventListener('contextmenu', function (e) {
             // Vous pouvez ajouter une logique de protection ici si nécessaire
         });
     });
-    
+
     // ===================================
     // Loading Animation (Optional)
     // ===================================
@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
             heroSection.classList.add('visible');
         }, 100);
     }
-    
+
     // ===================================
     // Console Message (Branding)
     // ===================================
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'color: #00D9FF; font-size: 20px; font-weight: bold;',
         'color: #0A2540; font-size: 14px;'
     );
-    
+
     // ===================================
     // Handle External Links
     // ===================================
@@ -267,18 +267,18 @@ document.addEventListener('DOMContentLoaded', function() {
             link.setAttribute('rel', 'noopener noreferrer');
         }
     });
-    
+
     // ===================================
     // Mobile Menu Auto-Close on Outside Click
     // ===================================
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         const navbarCollapse = document.getElementById('navbarNav');
         const navbarToggler = document.querySelector('.navbar-toggler');
-        
+
         if (navbarCollapse && navbarCollapse.classList.contains('show')) {
             const isClickInsideNav = navbarCollapse.contains(event.target);
             const isClickOnToggler = navbarToggler.contains(event.target);
-            
+
             if (!isClickInsideNav && !isClickOnToggler) {
                 const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
                     toggle: false
@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
+
     // ===================================
     // Preload Important Assets
     // ===================================
@@ -296,14 +296,14 @@ document.addEventListener('DOMContentLoaded', function() {
     preconnectLink.rel = 'preconnect';
     preconnectLink.href = 'https://cdn.jsdelivr.net';
     document.head.appendChild(preconnectLink);
-    
+
     // ===================================
     // Form Validation Enhancement (pour futur usage)
     // ===================================
     const forms = document.querySelectorAll('.needs-validation');
-    
+
     forms.forEach(form => {
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function (event) {
             if (!form.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
             form.classList.add('was-validated');
         }, false);
     });
-    
+
     // ===================================
     // Analytics Ready (Placeholder)
     // ===================================
@@ -321,16 +321,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Intégration future avec Google Analytics, Plausible, etc.
         // Example: gtag('event', 'cta_click', { 'cta_name': ctaName });
     }
-    
+
     // Ajouter le tracking aux boutons CTA principaux
     const ctaButtons = document.querySelectorAll('.btn-accent, .btn-success, .btn-primary');
     ctaButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const ctaText = this.textContent.trim();
             trackCTAClick(ctaText);
         });
     });
-    
+
     // ===================================
     // Responsive Table Handler (pour futur usage)
     // ===================================
@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function() {
             wrapper.appendChild(table);
         });
     }
-    
+
     // ===================================
     // Back to Top Button (Optional - Disabled by Default)
     // ===================================
@@ -370,18 +370,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     */
-    
+
     // ===================================
     // Performance Monitoring
     // ===================================
     if ('performance' in window) {
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             const perfData = window.performance.timing;
             const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
             console.log(`⚡ Page chargée en ${pageLoadTime}ms`);
         });
     }
-    
+
     // ===================================
     // Service Worker Registration (pour PWA future)
     // ===================================
