@@ -531,6 +531,15 @@ section {
    =================================== */
 section {
     padding: 5rem 0;
+    color: var(--color-dark);
+}
+
+section h2 {
+    color: var(--color-primary);
+}
+
+section .text-muted {
+    color: var(--color-dark) !important;
 }
 
 @media (max-width: 768px) {
