@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ===================================
     console.log(
         '%c👨‍💻 L\'Ingé Patrimoine %c\n' +
-        'La finance enfin logique.\n' +
+        'La rigueur d\'un ingénieur au service de votre patrimoine.\n' +
         'Développé avec rigueur et passion.',
         'color: #00D9FF; font-size: 20px; font-weight: bold;',
         'color: #0A2540; font-size: 14px;'
