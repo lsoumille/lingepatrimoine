@@ -4,8 +4,15 @@
   <!-- Homepage -->
   <url>
     <loc>https://lingepatrimoine.fr/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2026-08-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <!-- Mentions légales -->
+  <url>
+    <loc>https://lingepatrimoine.fr/mentions-legales</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>
