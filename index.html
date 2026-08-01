@@ -67,19 +67,41 @@
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "L'Ingé Patrimoine",
+      "legalName": "Lucas Soumille",
       "description": "Consultant en gestion de patrimoine avec la rigueur d'un ingénieur",
       "url": "https://lingepatrimoine.fr",
       "logo": "https://lingepatrimoine.fr/logo/logo_inge_patrimoine-removebg-preview.png",
       "image": "https://lingepatrimoine.fr/logo/logo_inge_patrimoine-removebg-preview.png",
       "email": "l.inge.patrimoine@gmail.com",
+      "telephone": "+33636428378",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "23 Allée des Arlésiens",
+        "postalCode": "13770",
+        "addressLocality": "Venelles",
+        "addressRegion": "Provence-Alpes-Côte d'Azur",
         "addressCountry": "FR"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "addressCountry": "France"
+      "identifier": [
+        {
+          "@type": "PropertyValue",
+          "name": "SIREN",
+          "value": "843263401"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "ORIAS",
+          "value": "26001772"
+        }
+      ],
+      "memberOf": {
+        "@type": "Organization",
+        "name": "INOVEA"
       },
+      "sameAs": [
+        "https://www.linkedin.com/in/lucas-l-ing%C3%A9-patrimoine-799105403/",
+        "https://lingepatrimoine.substack.com"
+      ],
       "priceRange": "$$",
       "serviceType": ["Gestion de patrimoine", "Conseil financier", "Optimisation fiscale", "Investissement", "Succession"],
       "areaServed": {
@@ -467,6 +489,7 @@
     </section>
 
     <!-- Footer -->
+    <!-- SYNC: garder identique au footer de mentions-legales.html -->
     <footer class="bg-dark text-light py-4" role="contentinfo" aria-label="Pied de page">
         <div class="container">
             <div class="row g-4">
@@ -502,7 +525,7 @@
                         </a>
                     </div>
                     <p class="small text-muted mb-2">
-                        <a href="[URL_MENTIONS_LEGALES_PLACEHOLDER]" class="text-decoration-none text-muted hover-link"
+                        <a href="mentions-legales.html" class="text-decoration-none text-muted hover-link"
                             title="Consulter les mentions légales">Mentions Légales</a>
                     </p>
                 </div>
@@ -512,7 +535,31 @@
 
             <div class="row">
                 <div class="col text-center">
-                    <p class="small text-muted mb-0">&copy; 2026 L'Ingé Patrimoine. Tous droits réservés.</p>
+                    <p class="small text-muted mb-2">&copy; 2026 L'Ingé Patrimoine. Tous droits réservés.</p>
+                    <p class="small text-muted mb-2">
+                        Lucas Soumille &mdash; Entrepreneur Individuel &middot;
+                        ORIAS n&deg; 26001772 (<a href="https://www.orias.fr"
+                            class="text-light text-decoration-underline" target="_blank" rel="noopener noreferrer"
+                            title="Vérifier l'inscription sur le registre de l'ORIAS">orias.fr</a>) &middot;
+                        RCS Aix-en-Provence 843 263 401 &middot;
+                        RC Pro MMA n&deg; 127128662
+                    </p>
+                    <p class="small text-muted mb-2">
+                        Réclamations : par e-mail à
+                        <a href="mailto:l.inge.patrimoine@gmail.com" class="text-light text-decoration-underline"
+                            title="Adresser une réclamation par e-mail">l.inge.patrimoine@gmail.com</a>
+                        ou par téléphone au
+                        <a href="tel:+33636428378" class="text-light text-decoration-underline"
+                            title="Adresser une réclamation par téléphone">06 36 42 83 78</a>
+                        &mdash; accusé de réception sous 10 jours ouvrables, réponse sous 2 mois maximum.
+                    </p>
+                    <p class="small text-muted mb-0">
+                        Médiation de la consommation : SAS CNPM &mdash; MÉDIATION &mdash; CONSOMMATION &mdash;
+                        3 rue J. Constant Milleret, 42000 Saint-Étienne &mdash;
+                        <a href="https://www.medconsodev.eu" class="text-light text-decoration-underline"
+                            target="_blank" rel="noopener noreferrer"
+                            title="Déposer une réclamation auprès de CNPM - Médiation - Consommation">medconsodev.eu</a>
+                    </p>
                 </div>
             </div>
         </div>
